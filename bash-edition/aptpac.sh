@@ -25,7 +25,7 @@
 #
 
 #variables
-appver="2.1-bash"
+appver="2.1.1-bash"
 
 #functions
 function help() {
@@ -40,7 +40,9 @@ function help() {
     echo "	find - (pacman -F) in debian: 'apt-file search'."
     echo "	update - equivalent of 'apt update' in debian."
 	echo "	upgrade - equivalent of 'apt upgrade' in debian."
-    echo "	autoclean - clean up all local caches."
+	echo "	full-upgrade - same as 'upgrade'."
+    echo "	autoclean - clean up pacman caches."
+    echo "	clean - same as 'autoclean'."
     echo "	autoremove - remove packages that are no longer needed."
     echo "	show - show the information of a package that is installed."
     echo "	show-all - same as 'show', but shows packages from the repos."
@@ -69,6 +71,15 @@ fi
 
 while [[ "$1" != '' ]]; do
 	case $1 in
+		--learning-mode*)
+			MODE=$(echo $1 | sed -e 's/^[^=]*=//g')
+			if [[ "$MODE" == "on" ]]; then
+				echo "learning mode on"
+			elif [[ "$MODE" == "off" ]]; then
+				echo "learning mode off"
+			fi
+			shift
+		;;
 		install)
 			shift
 			sudo pacman -S "$@"
@@ -98,12 +109,12 @@ while [[ "$1" != '' ]]; do
 			sudo pacman -Sy
 			break
 		;;
-		upgrade)
+		upgrade|full-upgrade)
 			sudo pacman -Su
 			break
 		;;
 		autoclean|clean)
-			sudo pacman -Sc
+			sudo pacman -Scc
 			break
 		;;
 		autoremove)

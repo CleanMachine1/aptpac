@@ -1,4 +1,5 @@
 # aptpac
+![Build status badge](https://img.shields.io/github/workflow/status/Itai-Nelken/aptpac/Build?label=Build%20x64&style=flat-square) ![Build-armhf status badge](https://img.shields.io/github/workflow/status/Itai-Nelken/aptpac/Build-armhf?label=Build%20armhf&style=flat-square) ![Build-arm64 status badge](https://img.shields.io/travis/com/Itai-Nelken/aptpac?label=Build%20arm64&style=flat-square)
 
 aptpac is a program which helps with the transition to Arch Linux and Arch based distros like Manjaro.
 
@@ -21,7 +22,9 @@ AVAILABLE OPTIONS:
         find - (`pacman -F`) in debian: `apt-file search`.
         update - equivalent of `apt update` in debian.
         upgrade - equivalent of `apt upgrade` in debian.
-        autoclean - clean up all local caches.
+        full-upgrade - same as 'upgrade'.
+        autoclean - clean up pacman caches.
+        clean - same as 'autoclean'.
         autoremove - remove packages that are no longer needed.
         show - show the information of a package that is installed.
         show-all - same as 'show', but shows packages from the repos.
@@ -48,7 +51,7 @@ git clone https://github.com/Itai-Nelken/aptpac
 cd ./aptpac/C-edition
 mkdir build
 cd build 
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release
 make
 # Optional however crucial
 sudo make install # This moves aptpac to /usr/local/bin so it can be run easily
@@ -91,3 +94,13 @@ source .bashrc
 ## Reviews
 
 <a href="https://github.com/CleanMachine1" target="_blank">CleanMachine1</a> - aptpac is a great piece of software, making the move to arch easier (the better Linux)
+
+## Daily builds
+
+Daily builds for x64 and armhf are available in the 'actions' tab of this repo, click on 'build-release' or 'build-release-armhf',
+click on the latest build with a green ✔️, scroll down to the 'artifacts' section, and click on the zip there.
+keep in mind you need a github account to download them.
+
+## Build checks
+
+Build checks for arm64, armhf, and x64 are run for every commit and pr. you can see the status in the badges at the top of the readme.
