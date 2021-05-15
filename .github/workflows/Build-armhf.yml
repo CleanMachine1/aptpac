@@ -3,8 +3,10 @@ name: Build-armhf
 on:
   push:
     branches: [ main ]
+    paths-ignore: [README.md]
   pull_request:
     branches: [ main ]
+    paths-ignore: [README.md]
 
 jobs:
   build:
@@ -24,7 +26,7 @@ jobs:
           cd C-edition/
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Release ..
+          cmake -DCMAKE_BUILD_TYPE=Debug ..
           make -j4
           
       - name: gen-date
